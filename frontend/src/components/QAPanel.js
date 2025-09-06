@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  HelpCircle, 
-  Send, 
-  FileText, 
-  Lightbulb,
-  CheckCircle,
+import {
   AlertCircle,
-  RefreshCw
+  CheckCircle,
+  FileText,
+  HelpCircle,
+  Lightbulb,
+  RefreshCw,
+  Send
 } from 'lucide-react';
-import { useDocument } from '../context/DocumentContext';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useDocument } from '../context/DocumentContext';
 
 const QAPanel = () => {
   const { documents } = useDocument();
@@ -114,7 +114,7 @@ const QAPanel = () => {
             <p className="text-gray-600">Ask questions about your uploaded documents</p>
           </div>
         </div>
-        
+
         {documents.length === 0 && (
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <div className="flex items-center space-x-2">
@@ -133,7 +133,7 @@ const QAPanel = () => {
           {/* Question Form */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Ask a Question</h2>
-            
+
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Document Selection */}
               {documents.length > 0 && (
@@ -209,7 +209,7 @@ const QAPanel = () => {
                   </button>
                 </div>
               </div>
-              
+
               <div className="prose max-w-none">
                 <p className="text-gray-900 leading-relaxed">{answer}</p>
               </div>
@@ -243,7 +243,7 @@ const QAPanel = () => {
               <Lightbulb className="w-5 h-5 text-yellow-500" />
               <h3 className="text-lg font-semibold text-gray-900">Suggested Questions</h3>
             </div>
-            
+
             <div className="space-y-2">
               {generateRelatedQuestions().map((relatedQ, index) => (
                 <button
@@ -261,7 +261,7 @@ const QAPanel = () => {
           {qaHistory.length > 0 && (
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Questions</h3>
-              
+
               <div className="space-y-3">
                 {qaHistory.slice(0, 5).map((qa) => (
                   <div key={qa.id} className="p-3 bg-gray-50 rounded-lg">

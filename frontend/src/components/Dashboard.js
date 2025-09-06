@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  FileText, 
-  MessageSquare, 
-  Upload, 
-  TrendingUp,
-  Clock,
+import {
   CheckCircle,
-  AlertCircle
+  Clock,
+  FileText,
+  MessageSquare,
+  Upload
 } from 'lucide-react';
-import { useDocument } from '../context/DocumentContext';
+import React, { useEffect, useState } from 'react';
 import { useChat } from '../context/ChatContext';
+import { useDocument } from '../context/DocumentContext';
 
 const Dashboard = () => {
-  const { documents, loading: docsLoading } = useDocument();
-  const { messages, loading: chatLoading } = useChat();
+  const { documents } = useDocument();
+  const { messages } = useChat();
   const [stats, setStats] = useState({
     totalDocuments: 0,
     totalMessages: 0,

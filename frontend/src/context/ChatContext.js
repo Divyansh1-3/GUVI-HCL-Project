@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import toast from 'react-hot-toast';
 
 const ChatContext = createContext();
@@ -53,7 +53,7 @@ export const ChatProvider = ({ children }) => {
       }
 
       const result = await response.json();
-      
+
       // Update session ID if it's new
       if (result.session_id && result.session_id !== state.sessionId) {
         dispatch({ type: 'SET_SESSION', payload: result.session_id });
@@ -96,13 +96,13 @@ export const ChatProvider = ({ children }) => {
   const loadChatHistory = async (sessionId) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      
+
       const response = await fetch(`/chat/history/${sessionId}`);
-      
+
       if (!response.ok) {
         throw new Error('Failed to load chat history');
       }
-      
+
       const data = await response.json();
       dispatch({ type: 'SET_MESSAGES', payload: data.messages });
       dispatch({ type: 'SET_SESSION', payload: sessionId });
@@ -134,7 +134,7 @@ export const ChatProvider = ({ children }) => {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    
+
     toast.success('Chat exported successfully!');
   };
 

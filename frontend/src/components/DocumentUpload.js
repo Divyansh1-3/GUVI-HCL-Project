@@ -1,13 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import { AlertCircle, CheckCircle, Upload, X } from 'lucide-react';
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Upload, FileText, CheckCircle, AlertCircle, X } from 'lucide-react';
-import { useDocument } from '../context/DocumentContext';
 import toast from 'react-hot-toast';
+import { useDocument } from '../context/DocumentContext';
 
 const DocumentUpload = () => {
-  const { uploadDocument, loading } = useDocument();
+  const { uploadDocument } = useDocument();
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [dragActive, setDragActive] = useState(false);
 
   const onDrop = useCallback(async (acceptedFiles) => {
     const newFiles = acceptedFiles.map(file => ({
@@ -22,19 +21,19 @@ const DocumentUpload = () => {
     // Upload files
     for (const fileObj of newFiles) {
       try {
-        setUploadedFiles(prev => 
-          prev.map(f => 
-            f.id === fileObj.id 
+        setUploadedFiles(prev =>
+          prev.map(f =>
+            f.id === fileObj.id
               ? { ...f, status: 'uploading', progress: 50 }
               : f
           )
         );
 
         const result = await uploadDocument(fileObj.file);
-        
-        setUploadedFiles(prev => 
-          prev.map(f => 
-            f.id === fileObj.id 
+
+        setUploadedFiles(prev =>
+          prev.map(f =>
+            f.id === fileObj.id
               ? { ...f, status: 'completed', progress: 100, result }
               : f
           )
@@ -42,9 +41,9 @@ const DocumentUpload = () => {
 
         toast.success(`${fileObj.file.name} uploaded successfully!`);
       } catch (error) {
-        setUploadedFiles(prev => 
-          prev.map(f => 
-            f.id === fileObj.id 
+        setUploadedFiles(prev =>
+          prev.map(f =>
+            f.id === fileObj.id
               ? { ...f, status: 'error', progress: 0 }
               : f
           )
@@ -121,11 +120,10 @@ const DocumentUpload = () => {
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <div
           {...getRootProps()}
-          className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
-            isDragActive
+          className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${isDragActive
               ? 'border-blue-500 bg-blue-50'
               : 'border-gray-300 hover:border-gray-400'
-          }`}
+            }`}
         >
           <input {...getInputProps()} />
           <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -161,7 +159,7 @@ const DocumentUpload = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-3">
                   {fileObj.status === 'uploading' && (
                     <div className="w-32 bg-gray-200 rounded-full h-2">
@@ -171,9 +169,9 @@ const DocumentUpload = () => {
                       />
                     </div>
                   )}
-                  
+
                   {getStatusIcon(fileObj.status)}
-                  
+
                   <button
                     onClick={() => removeFile(fileObj.id)}
                     className="p-1 text-gray-400 hover:text-red-500 transition-colors"
