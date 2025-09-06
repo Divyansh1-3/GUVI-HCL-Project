@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import toast from 'react-hot-toast';
+import { API_ENDPOINTS } from '../config/api';
 
 const ChatContext = createContext();
 
@@ -36,7 +37,7 @@ export const ChatProvider = ({ children }) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
 
-      const response = await fetch('/chat', {
+      const response = await fetch(API_ENDPOINTS.CHAT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +98,7 @@ export const ChatProvider = ({ children }) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
 
-      const response = await fetch(`/chat/history/${sessionId}`);
+      const response = await fetch(API_ENDPOINTS.CHAT_HISTORY(sessionId));
 
       if (!response.ok) {
         throw new Error('Failed to load chat history');

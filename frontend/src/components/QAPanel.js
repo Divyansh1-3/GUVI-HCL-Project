@@ -10,6 +10,7 @@ import {
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDocument } from '../context/DocumentContext';
+import { API_ENDPOINTS } from '../config/api';
 
 const QAPanel = () => {
   const { documents } = useDocument();
@@ -33,7 +34,7 @@ const QAPanel = () => {
         formData.append('document_id', selectedDocument);
       }
 
-      const response = await fetch('/qa', {
+      const response = await fetch(API_ENDPOINTS.QA, {
         method: 'POST',
         body: formData,
       });

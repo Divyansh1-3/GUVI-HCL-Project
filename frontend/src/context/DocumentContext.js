@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { API_ENDPOINTS } from '../config/api';
 
 const DocumentContext = createContext();
 
@@ -42,7 +43,7 @@ export const DocumentProvider = ({ children }) => {
   const fetchDocuments = async () => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
-      const response = await fetch('/documents');
+      const response = await fetch(API_ENDPOINTS.DOCUMENTS);
       
       if (!response.ok) {
         throw new Error('Failed to fetch documents');
@@ -61,7 +62,7 @@ export const DocumentProvider = ({ children }) => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('/upload', {
+      const response = await fetch(API_ENDPOINTS.UPLOAD, {
         method: 'POST',
         body: formData,
       });
@@ -93,7 +94,7 @@ export const DocumentProvider = ({ children }) => {
 
   const deleteDocument = async (documentId) => {
     try {
-      const response = await fetch(`/documents/${documentId}`, {
+      const response = await fetch(API_ENDPOINTS.DELETE_DOCUMENT(documentId), {
         method: 'DELETE',
       });
 
@@ -110,7 +111,7 @@ export const DocumentProvider = ({ children }) => {
 
   const getDocumentContent = async (documentId) => {
     try {
-      const response = await fetch(`/documents/${documentId}/content`);
+      const response = await fetch(API_ENDPOINTS.DOCUMENT_CONTENT(documentId));
       
       if (!response.ok) {
         throw new Error('Failed to fetch document content');
