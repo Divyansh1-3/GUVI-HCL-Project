@@ -1,0 +1,22 @@
+{
+  "name": "SolveX AI",
+  "version": "1.0.0",
+  "description": "A comprehensive Document Q&A System with chat functionality",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+    "client": "cd frontend && npm start",
+    "build": "cd frontend && npm run build",
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && pip install -r requirements.txt"
+  },
+  "keywords": [
+    "document",
+    "qa",
+    "chat",
+    "ai",
+    "llm"
+  ],
+  "author": "Mission UpSkill India Hackathon Team",
+  "license": "MIT"
+}
