@@ -1,21 +1,29 @@
+# Core FastAPI dependencies
 fastapi>=0.104.1
-uvicorn[standard]>=0.24.0
+uvicorn>=0.24.0
 python-multipart>=0.0.6
 pydantic>=2.5.0
 python-dotenv>=1.0.0
+
+# OpenAI API
 openai>=1.3.7
-chromadb>=0.4.18
-langchain>=0.0.350
-langchain-openai>=0.0.2
-langchain-community>=0.0.10
+
+# Database
+sqlalchemy>=2.0.23
+
+# File processing (lightweight alternatives)
 pypdf2>=3.0.1
 python-docx>=1.1.0
-sentence-transformers>=2.2.2
-numpy>=1.24.3
-pandas>=2.0.3
-sqlalchemy>=2.0.23
+
+# Basic utilities
 aiofiles>=23.2.1
 python-jose[cryptography]>=3.3.0
 passlib[bcrypt]>=1.7.4
 jinja2>=3.1.2
-gunicorn>=21.2.0
+
+# Minimal vector store (no heavy ML libraries)
+chromadb>=0.4.18
+
+# Basic data processing
+numpy>=1.24.3
+pandas>=2.0.3

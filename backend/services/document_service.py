@@ -5,14 +5,14 @@ from typing import List, Dict, Optional
 from sqlalchemy.orm import Session
 from models.database import Document, get_db
 from utils.file_processor import FileProcessor
-from utils.vector_store import VectorStore
+from utils.vector_store_light import VectorStoreLight
 import json
 from datetime import datetime
 
 class DocumentService:
     def __init__(self):
         self.file_processor = FileProcessor()
-        self.vector_store = VectorStore()
+        self.vector_store = VectorStoreLight()
         self.upload_dir = os.getenv("UPLOAD_DIRECTORY", "./uploads")
         os.makedirs(self.upload_dir, exist_ok=True)
     

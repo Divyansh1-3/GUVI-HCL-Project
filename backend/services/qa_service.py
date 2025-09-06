@@ -2,13 +2,13 @@ import os
 import openai
 from typing import Dict, List
 from services.document_service import DocumentService
-from utils.vector_store import VectorStore
+from utils.vector_store_light import VectorStoreLight
 import json
 
 class QAService:
     def __init__(self):
         self.document_service = DocumentService()
-        self.vector_store = VectorStore()
+        self.vector_store = VectorStoreLight()
         self.openai_client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     
     async def initialize(self):
