@@ -16,6 +16,6 @@
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "https://your-backend-url.onrender.com"
+    "REACT_APP_API_URL": "https://guvi-hcl-project-2.onrender.com"
   }
 }
